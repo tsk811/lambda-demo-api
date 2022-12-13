@@ -78,6 +78,7 @@ components:
         post_code:
           type: string
           example: BT06YU
+          pattern: "^([A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}|[GIR 0AA])$"
     Message:
       type: object
       properties:
