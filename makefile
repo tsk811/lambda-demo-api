@@ -8,4 +8,4 @@ install: install.cdk
 
 #python
 pip.install:
-	cd lambda && pip3 install -t . -r ./requirements.txt
+	cd app && pip3 install -t . -r ./requirements.txt
