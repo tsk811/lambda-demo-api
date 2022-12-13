@@ -1,0 +1,42 @@
+{
+    "artifactBucket": "/configs/artifactBucket",
+    "appName": "LambdaDemoAPI",
+    "vpcInfo": {
+        "vpcId": "/configs/vpc",
+        "availabilityZones": "/configs/availabilityZones",
+        "publicSubnets": "/configs/publicSubnets",
+        "privateSubnets": "/configs/privateSubnets",
+        "publicSubnetA": "/configs/publicSubnetA",
+        "publicSubnetB": "/configs/publicSubnetB",
+        "publicSubnetC": "/configs/publicSubnetC",
+        "privateSubnetA": "/configs/privateSubnetA",
+        "privateSubnetB": "/configs/privateSubnetB",
+        "privateSubnetC": "/configs/privateSubnetC"
+    },
+    "account": {
+        "nonProd": "799771142381",
+        "prod": "734082183364",
+        "region": "us-east-1"
+    },
+    "codeRepo": {
+        "name": "lambda-demo-api",
+        "defaultBranch": "main"
+    },
+    "route53": {
+        "zoneId": "/configs/hostedZoneId",
+        "zoneName": "/configs/hostedZoneName",
+        "recordName": "lambdademoapi"
+    },
+    "kms": {
+        "arn": "/configs/kms_key"
+    },
+    "roles": {
+        "deployRole": "/configs/ProdDeploymentRole",
+        "crossAccountRole": "/configs/CrossAccountRole"
+    },
+    "github_secret": {
+        "name": "/secrets/github_token",
+        "key": "token"
+    },
+    "lambda_prefix": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/"
+}

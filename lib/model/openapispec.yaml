@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: LambdaDemoAPI
+  description: |-
+    This is a sample REST API built using AWS Lambda and API Gateway.
+  version: 1.0.0
+paths:
+  /address:
+    get:
+      description: Get Address details from a Key
+      parameters:
+        - name: "key"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '404':
+          description: Address not found
+        '500':
+          description: Processing error
+      security:
+      - api_key: []
+      x-amazon-apigateway-request-validator: Validator
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: LAMBDA_ARN_VALUE
+        passthroughBehavior: "when_no_match"
+        type: "aws_proxy"
+    post:
+      description: Add a new address
+      requestBody:
+        description: Save a new address in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - api_key: []
+      x-amazon-apigateway-request-validator: Validator
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: LAMBDA_ARN_VALUE
+        passthroughBehavior: "when_no_match"
+        type: "aws_proxy"
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        no:
+          type: integer
+          format: int64
+          example: 10
+        street:
+          type: string
+          example: Cedar Road
+        city:
+          type: string
+          example: Bristol
+        State:
+          type: string
+          example: London
+        post_code:
+          type: string
+          example: BT06YU
+    Message:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 5859bb4c-e557-49ab-b1eb-c8e9c7b71496
+  securitySchemes:
+    api_key:
+      type: "apiKey"
+      name: "x-api-key"
+      in: "header"
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_5XX:
+    responseTemplates:
+      application/json: "{\"message\":$context.error.message}"
+  DEFAULT_4XX:
+    responseTemplates:
+      application/json: "{\"message\":$context.error.message}"
+x-amazon-apigateway-request-validators:
+  Validator:
+    validateRequestParameters: true
+    validateRequestBody: true
